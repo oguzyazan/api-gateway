@@ -16,8 +16,6 @@ const services = [
   },
 ];
 
-console.log(process.env.NODE_ENV);
-
 const app = express();
 
 var unless = function (middleware) {
