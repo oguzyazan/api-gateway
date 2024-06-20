@@ -11,9 +11,14 @@ const getList = asyncHandler(async (req: Request, res: Response) => {
 const register = asyncHandler(async (req: Request, res: Response) => {
   const user = req.body;
   const createdUser = await userService.register(user);
-  res
-    .status(201)
-    .json({ message: `New user ${createdUser.user?.Username} created` });
+
+  if (createdUser.error) {
+    res.status(500).json({ message: createdUser.error });
+  } else {
+    res
+      .status(201)
+      .json({ message: `New user ${createdUser.user?.Username} created` });
+  }
 });
 
 const login = asyncHandler(async (req: Request, res: Response) => {
